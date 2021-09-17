@@ -1,17 +1,22 @@
-import { UserController } from "./../controllers/userController";
 import express from "express";
-import { userCreateValidator } from "../validators/users/create";
+import { UserController } from "./../controllers/userController";
+import { userCreateValidator } from "../validators/users/create/create";
 
 export class UserViews {
     static async get(req: express.Request, res: express.Response) {
-        const users = UserController.getEveryone();
+        const users = await UserController.getEveryone();
 
         return res.status(200).send({ users: users });
     }
 
     static async getById(req: express.Request, res: express.Response) {
         const userID = req.params.id;
-        const user = UserController.getById(userID);
+
+        const user = await UserController.getById(userID);
+
+        if (!user) {
+            return res.status(400).send();
+        }
 
         return res.status(200).send({ users: user });
     }
@@ -20,12 +25,14 @@ export class UserViews {
         const userInfo = req.body;
 
         const errors = userCreateValidator(userInfo);
-        if (errors) {
-            res.status(400).send({ errors: errors });
-        }
+        if (errors) return res.status(400).send({ errors: errors });
 
-        const token = UserController.create(userInfo);
+        console.log("A");
+        const token = await UserController.create(userInfo);
+        return res.status(201).send({ token: token });
     }
+
+    static async login(req: express.Request, res: express.Response) {}
 
     static async put(req: express.Request, res: express.Response) {
         console.log(req.headers.host);

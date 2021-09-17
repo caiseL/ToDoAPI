@@ -1,3 +1,4 @@
+import { userEmailValidator } from "./email";
 import { userInfoValidator } from "./object";
 import { userPasswordValidator } from "./password";
 
@@ -6,11 +7,8 @@ export const userCreateValidator = (userInfo: { [key: string]: string }) => {
 
     try {
         userInfoValidator(userInfo);
+        userEmailValidator(userInfo.email);
         userPasswordValidator(userInfo.password);
-        console.log("Todo bn");
-        return;
-        // Verificar email
-        // Y el nombre
     } catch (e: any) {
         errors.push({
             name: e.name,
@@ -18,5 +16,5 @@ export const userCreateValidator = (userInfo: { [key: string]: string }) => {
         });
     }
 
-    return errors.length === 0 ? undefined : errors;
+    return errors;
 };

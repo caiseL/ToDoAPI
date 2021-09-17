@@ -1,7 +1,0 @@
-import { EmptyUserObject } from "../errors/users/emptyObject";
-
-export const userInfoValidator = (userInfo: { [key: string]: string }) => {
-    if (!userInfo || Object.keys(userInfo).length === 0) {
-        throw new EmptyUserObject();
-    }
-};

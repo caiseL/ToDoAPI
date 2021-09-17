@@ -10,20 +10,16 @@ export interface User extends Document {
 
 const userSchema = new Schema(
     {
-        profileName: {
-            type: String,
-            required: true,
-        },
-        profilePhoto: String,
         email: {
             type: String,
             required: true,
         },
-        ToDo: [{ type: Schema.Types.ObjectId, ref: "ToDo" }],
         password: {
             type: String,
             required: true,
         },
+        ToDo: [{ type: Schema.Types.ObjectId, ref: "ToDo" }],
+        profilePhoto: String,
     },
     { timestamps: true }
 );
