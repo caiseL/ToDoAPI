@@ -4,9 +4,9 @@
     "description": "",
     "main": "dist/app.js",
     "scripts": {
-        "start": "tsc && node dist/app.js",
-        "dev": "nodemon src/app.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "prod": "tsc && node dist/app.js",
+        "start": "node dist/app.js",
+        "dev": "nodemon src/app.ts"
     },
     "author": "",
     "license": "MIT",
