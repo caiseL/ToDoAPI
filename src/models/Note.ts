@@ -1,10 +1,11 @@
 import { Document, Schema, model } from "mongoose";
 
-export interface ToDo extends Document {
+export interface Note extends Document {
     title: string;
     status: Status;
     description?: string;
     tags?: Array<string>;
+    postedBy: string;
 }
 
 enum Status {
@@ -13,7 +14,7 @@ enum Status {
     DONE = "DONE",
 }
 
-const toDoSchema = new Schema(
+const noteSchema = new Schema(
     {
         title: {
             type: String,
@@ -32,8 +33,12 @@ const toDoSchema = new Schema(
                 type: Schema.Types.ObjectId,
             },
         ],
+        postedBy: {
+            ref: "User",
+            type: Schema.Types.ObjectId,
+        },
     },
     { timestamps: true }
 );
 
-export const ToDo = model<ToDo>("ToDo", toDoSchema);
+export const Note = model<Note>("Note", noteSchema);

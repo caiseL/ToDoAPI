@@ -4,7 +4,7 @@ export interface User extends Document {
     profileName: string;
     profilePhoto?: string;
     email: string;
-    ToDo?: Array<string>;
+    notes?: Array<string>;
     password: string;
 }
 
@@ -18,7 +18,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
-        ToDo: [{ type: Schema.Types.ObjectId, ref: "ToDo" }],
+        notes: [{ type: Schema.Types.ObjectId, ref: "Note" }],
         profilePhoto: String,
     },
     { timestamps: true }
