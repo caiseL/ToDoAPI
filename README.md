@@ -24,5 +24,5 @@ $ npm i
 # Run production
 $ npm run prod
 
-# Don't forget to use your own .env file in api (check src/config/checkEnv.ts)
+# Don't forget to use your own .env file
 ```
