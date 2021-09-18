@@ -14,9 +14,7 @@ export class UserViews {
 
         const user = await UserController.getById(userID);
 
-        if (!user) {
-            return res.status(400).send();
-        }
+        if (!user) return res.status(400).send();
 
         return res.status(200).send({ users: user });
     }

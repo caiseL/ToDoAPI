@@ -15,7 +15,7 @@ export class UserController {
         userInfo.password = await hashPassword(userInfo.password);
 
         const newUser = await new User(userInfo).save();
-        return signJWT(newUser.id);
+        return signJWT(newUser);
     }
 
     static async update(userID: string, newUserInfo: User) {
@@ -36,5 +36,17 @@ export class UserController {
         return await User.exists({
             id: id,
         });
+    }
+
+    static async addNote(userId: string, noteId: string) {
+        return await User.findByIdAndUpdate(
+            userId,
+            {
+                $addToSet: { notes: noteId },
+            },
+            {
+                new: true,
+            }
+        );
     }
 }

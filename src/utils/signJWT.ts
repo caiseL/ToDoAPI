@@ -1,10 +1,13 @@
 import jwt from "jsonwebtoken";
+import { User } from "../models/User";
 
 const tokenSecret = process.env.TOKEN_SECRET!;
-export const signJWT = (userID: string) =>
+export const signJWT = (user: User) =>
     jwt.sign(
         {
-            id: userID,
+            user: {
+                id: user.id,
+            },
         },
         tokenSecret,
         {
